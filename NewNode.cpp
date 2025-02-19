@@ -1,59 +1,89 @@
-#include <bits\stdc++.h>
+#include <iostream>
 using namespace std;
-
-
-class node{
- public:
+class node
+{
+public:
     int val;
-    node* next;
+    node *next;
     node(int value)
     {
         this->val = value;
         this->next = nullptr;
     }
-    node(node* next)
-    {
-        this->next = next;
-    }
 };
-class Linkedlist{
-  public:
-    node* head;
-    node* tail;
-    Linkedlist()
+class linked_list
+{
+public:
+    node *head;
+    node *tail;
+    linked_list()
     {
         head = nullptr;
         tail = nullptr;
     }
-    void insertInFront(int value)
+    void insetinFront(int value)
     {
-        node* newnode = new node(value);
-        if(head==NULL)
+        node *newNode = new node(value);
+        if (head == NULL)
         {
-            head = newnode;
-            tail = newnode;
+            head = newNode;
+            tail = newNode;
         }
-        else{
-            newnode->next = head;
-            head = newnode;
+        else
+        {
+            newNode->next = head;
+            head = newNode;
         }
     }
-
-
-
+    void insertinBack(int value)
+    {
+        node *newNode = new node(value);
+        if (tail == NULL)
+        {
+            head = newNode;
+            tail = newNode;
+        }
+        else
+        {
+            newNode->next = nullptr;
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+    void insertinPos(int value, int pos)
+    {
+        node *newNode = new node(value);
+        int cnt = 1;
+        while (cnt!= pos-1)
+        {
+            head= head->next;
+            cnt++;
+        }
+        newNode->next = head->next;
+        head->next = newNode;
+    }
 };
-
-void solve()
-{
-    Linkedlist myList;
-    myList.insertInFront(5);
-    cout<<myList.head->val;
+ 
+void printList(linked_list lst){
+    node* temp = lst.head;
+    while (temp!= nullptr)
+    {
+        cout<<temp->val<<' ';
+        temp = temp->next;
+    }
+ 
 }
-int main()
-{
-
-    cout<<"Here is the usage of Linked List: \n";
-    solve();
-
-    return 0;
-}
+ 
+    int main()
+    {
+        linked_list list;
+        list.insetinFront(5);
+        list.insetinFront(10);
+        list.insertinBack(8);
+        list.insertinBack(9);
+        list.insertinPos(51, 2);
+ 
+        printList(list);
+ 
+ 
+    }
